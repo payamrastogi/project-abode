@@ -28,16 +28,19 @@ class TelegramClient:
         self.process(new_dict)
 
     def process(self, request):
-        processed_dict = self.get_home_details(request)
-        address = self.get_address(processed_dict)
-        new_dict = self.get_travel_distance(address)
-        processed_dict.update(new_dict)
-        if address:
-            processed_dict['address'] = address
-        print(processed_dict)
-        formatter = Formatter()
-        message = formatter.get_formatted_info(processed_dict)
-        self.send_message(request['chat_id'], message)
+        try:
+            processed_dict = self.get_home_details(request)
+            address = self.get_address(processed_dict)
+            new_dict = self.get_travel_distance(address)
+            processed_dict.update(new_dict)
+            if address:
+                processed_dict['address'] = address
+            print(processed_dict)
+            formatter = Formatter()
+            message = formatter.get_formatted_info(processed_dict)
+            self.send_message(request['chat_id'], message)
+        except Exception as e:
+            self.send_message(request['chat_id'], "An error occurred")
 
     def send_message(self, chat_id, message):
         self.bot.sendMessage(chat_id, message)
