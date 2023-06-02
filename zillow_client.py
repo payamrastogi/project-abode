@@ -33,10 +33,12 @@ class ZillowClient:
         new_dict = {}
         if raw_dictionary is not None:
             for k in raw_dictionary.keys():
+                # Add property details
                 if k.startswith('VariantQuery{"zpid":'):
                     property = raw_dictionary.get(k).get('property', None)
                     # print(property)
                     new_dict.update(property)
+                # get zestimate, bedrooms, bathrooms, yearBuilt, etc.
                 if k.startswith('ForSaleShopperPlatformFullRenderQuery{"zpid"'):
                     property = raw_dictionary.get(k).get('property', None)
                     new_dict['zestimate'] = property['zestimate']
@@ -52,6 +54,7 @@ class ZillowClient:
 
 if __name__ == "__main__":
     zillow_client = ZillowClient()
+    # Quick Test
     raw = zillow_client.fetch(
         "https://www.zillow.com/homedetails/3-Prusakowski-Blvd-Parlin-NJ-08859/64487996_zpid/?utm_campaign=iosappmessage&utm_medium=referral&utm_source=txtshare")
     processed = zillow_client.process_fetched_content(raw)

@@ -1,0 +1,15 @@
+# /etc/systemd/system/ssh-tunnel-persistent.service
+[Unit]
+StartLimitIntervalSec=0
+Description=Service to start project_abode_bot
+After=network.target
+
+[Service]
+Restart=on-failure
+RestartSec=5
+# Provide an user who you want to run your service with
+User=coddicted
+ExecStart=sh start_project_abode_bot.sh
+
+[Install]
+WantedBy=multi-user.target

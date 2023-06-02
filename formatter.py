@@ -18,10 +18,6 @@ class Formatter:
                 message += f" Z${processed_dict['zestimate']} |"
             if 'daysOnZillow' in processed_dict:
                 message += f" {processed_dict['daysOnZillow']}D\n"
-            if 'jfk1' in processed_dict and 'duration' in processed_dict['jfk1']:
-                message += f" Curr: {processed_dict['jfk1']['duration']} |"
             if 'metropark' in processed_dict and 'duration' in processed_dict['metropark']:
                 message += f"metropark: {processed_dict['metropark']['duration']} |"
-            if 'teb9' in processed_dict and 'duration' in processed_dict['teb9']:
-                message += f"teb9: {processed_dict['teb9']['duration']}\n"
         return message
